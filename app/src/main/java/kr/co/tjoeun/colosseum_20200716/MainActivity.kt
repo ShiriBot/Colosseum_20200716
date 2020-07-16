@@ -35,14 +35,16 @@ class MainActivity : BaseActivity() {
 //                    그 외의 숫자 : 로그인 실패
 
                     val codeNum = json.getInt("code")
+                    val responseMsg = json.getString("message")
 
                     if (codeNum==200){
 //                        로그인 성공
                     }
                     else{
 //                        로그인 실패 => 토스트로 실패했다고 출력하자.
+//                        어떤 이유로 실패했는지 버서가 주는 메시지를 출력
                         runOnUiThread {
-                            Toast.makeText(mContext,"로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext,responseMsg,Toast.LENGTH_SHORT).show()
                         }
 
                     }
