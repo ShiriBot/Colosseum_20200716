@@ -75,11 +75,10 @@ class SignUpActivity : BaseActivity() {
 //                        회원가입실패 => 서버가 알려주는 실패사유를 토스트로 출력
                         val message = json.getString("message")
 
-                        Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
+
 
                         runOnUiThread {
-
-
+                            Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
                         }
 
                     }
