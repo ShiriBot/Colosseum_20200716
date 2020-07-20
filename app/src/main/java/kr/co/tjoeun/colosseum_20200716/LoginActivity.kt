@@ -48,7 +48,7 @@ class LoginActivity : BaseActivity() {
                     }
                     else{
 //                        로그인 실패 => 토스트로 실패했다고 출력하자.
-//                        어떤 이유로 실패했는지 버서가 주는 메시지를 출력
+//                        어떤 이유로 실패했는지 서버가 주는 메시지를 출력
                         runOnUiThread {
                             Toast.makeText(mContext,responseMsg,Toast.LENGTH_SHORT).show()
                         }
