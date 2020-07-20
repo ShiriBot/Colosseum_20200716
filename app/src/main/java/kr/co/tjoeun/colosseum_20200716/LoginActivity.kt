@@ -1,5 +1,6 @@
 package kr.co.tjoeun.colosseum_20200716
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
@@ -19,6 +20,12 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun SetupEvents() {
+
+        signUpBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
 
         loginBtn.setOnClickListener {
 //            입력한 아이디와 비번을 받아서
