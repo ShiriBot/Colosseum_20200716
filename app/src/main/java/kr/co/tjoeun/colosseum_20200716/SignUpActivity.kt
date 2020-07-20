@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kr.co.tjoeun.colosseum_20200716.utils.ServerUtil
 
 class SignUpActivity : BaseActivity() {
 
@@ -22,6 +24,45 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun SetupEvents() {
+
+        okBtn.setOnClickListener {
+
+//            닉네임 / 이메일 비어있으면 안된다.
+
+            val inputEmail = emailEdt.text.toString()
+
+            if (inputEmail.isEmpty()){
+                Toast.makeText(mContext,"이메일은 반드시 입력해야 합니다.",Toast.LENGTH_SHORT).show()
+//                밑의 코드는 실행할 필요가 없다.
+//                이벤트 처리를 강제 종료.
+                return@setOnClickListener
+            }
+
+            val inputNickname = nickNameEdt.text.toString()
+
+            if(inputNickname.isEmpty()){
+                Toast.makeText(mContext,"닉네임은 반드시 입력해야 합니다.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+//            비번은 8글자 이내면 안됨.
+
+            val inputPassword = passwordEdt.text.toString()
+
+
+            if (inputPassword.isEmpty()){
+                Toast.makeText(mContext,"닉네임은 반드시 입력해야 합니다.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+//             모든 검사를 통과하면, 서버에 가입요청
+//            여기 코드가 실행된다=> 모든 검사를 통과했다.
+
+//            ServerUtil.
+
+
+        }
+
 
 //        비밀번호 입력 내용 변경 이벤트 처리
         passwordEdt.addTextChangedListener(object :TextWatcher{
