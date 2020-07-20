@@ -53,7 +53,8 @@ class LoginActivity : BaseActivity() {
                         
 //                        얻어낸 토큰을 저장
                         ContextUtil.setLoginUserToken(mContext,token)
-                        
+                        val myIntent = Intent(mContext,MainActivity::class.java)
+                        startActivity(myIntent)
                     }
                     else{
 //                        로그인 실패 => 토스트로 실패했다고 출력하자.
