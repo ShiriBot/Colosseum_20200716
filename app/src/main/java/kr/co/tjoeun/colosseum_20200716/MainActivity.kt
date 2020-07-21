@@ -1,5 +1,6 @@
 package kr.co.tjoeun.colosseum_20200716
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -75,6 +76,21 @@ class MainActivity : BaseActivity() {
     }
 
    override fun SetupEvents() {
+
+//       토론주제를 누르면 => 상세화면으로 이동
+       topicListView.setOnItemClickListener { parent, view, position, id ->
+
+//           눌린 위치에 맞는 주제를 가져오자
+           val clickedTopic = mTopicList[position]
+
+//           상세화면 진입 => 클릭된 주제의 id 값만 화면에 전달
+
+           val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+           myIntent.putExtra("topicId",clickedTopic.id)
+           startActivity(myIntent)
+
+       }
+
 
     }
 
