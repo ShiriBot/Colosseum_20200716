@@ -14,12 +14,10 @@ class User {
             val u = User()
 
 //            사용자 정보를 파싱하는 코드
-            val data = json.getJSONObject("data")
-            val userdata = data.getJSONObject("user")
 
-            u.id = userdata.getInt("id")
-            u.email = userdata.getString("email")
-            u.nickName =userdata.getString("nick_name")
+            u.id = json.getInt("id")
+            u.email = json.getString("email")
+            u.nickName = json.getString("nick_name")
 
             return u
 
