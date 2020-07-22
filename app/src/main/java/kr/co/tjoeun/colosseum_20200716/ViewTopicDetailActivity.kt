@@ -61,17 +61,7 @@ class ViewTopicDetailActivity : BaseActivity() {
 
                 runOnUiThread{
 
-                    topicTitleTxt.text = mTopic.title
-                    Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
-
-//                    토론 정보를 표시할 때, 진영 정보도 같이 표시
-                    firstSideTitleTxt.text=mTopic.sideList[0].title
-                    secondSideTitleTxt.text=mTopic.sideList[1].title
-
-                    firstSideVoteCountTxt.text="${mTopic.sideList[0].voteCount}표"
-                    secondSideVoteCountTxt.text="${mTopic.sideList[1].voteCount}표"
-
-
+                   setTopicDataToUI()
                 }
             }
         })
@@ -100,6 +90,16 @@ class ViewTopicDetailActivity : BaseActivity() {
             ServerUtil.postRequestVote(mContext,clickedSide.id, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
+                    val data = json.getJSONObject("data")
+                    val topic = data.getJSONObject("topic")
+
+                    mTopic = Topic.getTopicFromJson(topic)
+
+                    runOnUiThread {
+                        setTopicDataToUI()
+                    }
+
+
                 }
             })
 
@@ -109,6 +109,32 @@ class ViewTopicDetailActivity : BaseActivity() {
 //        두개의 투표하기 버튼이 눌리면 할 일을 모두 voteCode에 적힌 내용으로
         voteToFirstSideBtn.setOnClickListener (voteCode)
         voteToSecondSideBtn.setOnClickListener (voteCode)
+
+    }
+
+    fun setTopicDataToUI() {
+        topicTitleTxt.text = mTopic.title
+        Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
+
+//                    토론 정보를 표시할 때, 진영 정보도 같이 표시
+        firstSideTitleTxt.text=mTopic.sideList[0].title
+        secondSideTitleTxt.text=mTopic.sideList[1].title
+
+        firstSideVoteCountTxt.text="${mTopic.sideList[0].voteCount}표"
+        secondSideVoteCountTxt.text="${mTopic.sideList[1].voteCount}표"
+
+//        내가 투표를 했는지 or 어느 진영에 했는지에 따라 버튼 UX 변경
+//        투표를 안한 경우 : 두 버튼 모두 "투표하기" 표시 + 양 진영 모두 클릭 가능
+//        첫번째 진영 투표 : 첫 버튼 "투표 취소" , 두번째 진영 "갈아타기"
+//        그 외 : 두번째 진영 투표한 걸로 처리
+
+//        투표 한 진영이 몇번째 진영인지? 파악해야함.
+
+        if (mTopic.mySideId == -1){
+//            아직 투표 안 한 경우
+            voteToFirstSideBtn.text = "투표하기"
+            voteToSecondSideBtn.text = "투표하기"
+        }
 
     }
 
