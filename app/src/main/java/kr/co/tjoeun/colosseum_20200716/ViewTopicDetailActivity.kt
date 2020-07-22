@@ -130,10 +130,20 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 //        투표 한 진영이 몇번째 진영인지? 파악해야함.
 
-        if (mTopic.mySideId == -1){
+        if (mTopic.getMySideIndex() == -1){
 //            아직 투표 안 한 경우
             voteToFirstSideBtn.text = "투표하기"
             voteToSecondSideBtn.text = "투표하기"
+        }
+
+        else if (mTopic.getMySideIndex()==0){
+            voteToFirstSideBtn.text = "투표취소"
+            voteToSecondSideBtn.text = "갈아타기"
+        }
+
+        else {
+            voteToFirstSideBtn.text = "갈아타기"
+            voteToSecondSideBtn.text = "투표취소"
         }
 
     }
