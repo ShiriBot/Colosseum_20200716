@@ -1,5 +1,6 @@
 package kr.co.tjoeun.colosseum_20200716
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -132,6 +133,11 @@ class ViewTopicDetailActivity : BaseActivity() {
 //        두개의 투표하기 버튼이 눌리면 할 일을 모두 voteCode에 적힌 내용으로
         voteToFirstSideBtn.setOnClickListener (voteCode)
         voteToSecondSideBtn.setOnClickListener (voteCode)
+
+        postReplyBtn.setOnClickListener {
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
