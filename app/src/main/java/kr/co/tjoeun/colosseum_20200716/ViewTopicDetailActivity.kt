@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kotlinx.android.synthetic.main.reply_list_item.*
 import kr.co.tjoeun.colosseum_20200716.adapters.ReplyAdapter
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
 import kr.co.tjoeun.colosseum_20200716.datas.Topic
@@ -51,7 +52,6 @@ class ViewTopicDetailActivity : BaseActivity() {
 //        어댑터 초기화 => 리스트뷰와 연결
         mReplyAdapter = ReplyAdapter(mContext,R.layout.reply_list_item,mReplyList)
         replyListView.adapter = mReplyAdapter
-
     }
 
     fun getTopicDetailFromServer(){

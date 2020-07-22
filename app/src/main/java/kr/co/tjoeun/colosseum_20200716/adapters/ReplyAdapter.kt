@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import kr.co.tjoeun.colosseum_20200716.R
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
 
@@ -21,6 +22,16 @@ class ReplyAdapter (val mcontext: Context , resId : Int, val mList : List<Reply>
                     }
 
         val row = temprow !!
+
+        val replyNickname = row.findViewById<TextView>(R.id.replyNickname)
+        val replySide = row.findViewById<TextView>(R.id.replySide)
+        val replyTxt = row.findViewById<TextView>(R.id.replyTxt)
+
+        val data = mList[position]
+
+        replyNickname.text = data.writer.nickName
+        replySide.text = "${data.selestedSide.title}"
+        replyTxt.text = data.content
 
         return row
 
