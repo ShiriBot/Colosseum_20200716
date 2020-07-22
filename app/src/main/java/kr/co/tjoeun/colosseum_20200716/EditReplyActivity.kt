@@ -2,6 +2,7 @@ package kr.co.tjoeun.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_edit_reply.*
 
 class EditReplyActivity : BaseActivity() {
 
@@ -11,6 +12,9 @@ class EditReplyActivity : BaseActivity() {
     }
 
     override fun SetValues() {
+
+        topicTitleTxt.text = intent.getStringExtra("topicTitle")
+        mySideTitleTxt.text = intent.getStringExtra("selectedSideTitle")
 
     }
 

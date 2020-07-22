@@ -135,7 +135,17 @@ class ViewTopicDetailActivity : BaseActivity() {
         voteToSecondSideBtn.setOnClickListener (voteCode)
 
         postReplyBtn.setOnClickListener {
+
+//            투표를 안한 상태라면, 작성 화면 진입 거부 (투표부터 시키자)
+
+            if (mTopic.mySideId==-1){
+                Toast.makeText(mContext,"투표를 해야만 의견을 작성할 수 있습니당.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            myIntent.putExtra("topicTitle",mTopic.title)
+            myIntent.putExtra("selectedSideTitle",mTopic.mySide!!.title)
             startActivity(myIntent)
         }
 
