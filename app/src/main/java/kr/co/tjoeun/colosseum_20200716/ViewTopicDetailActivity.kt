@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.co.tjoeun.colosseum_20200716.adapters.ReplyAdapter
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
 import kr.co.tjoeun.colosseum_20200716.datas.Topic
 import kr.co.tjoeun.colosseum_20200716.utils.ServerUtil
@@ -23,13 +24,14 @@ class ViewTopicDetailActivity : BaseActivity() {
 //    토론 주제를 받아올 때 딸려오는 의견 목록을 담아줄 배열
     val mReplyList = ArrayList<Reply>()
 
+//    실제로 목록을 뿌려줄 어댑터
+    lateinit var mReplyAdapter : ReplyAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_topic_detail)
-
         SetValues()
         SetupEvents()
-
     }
 
 
@@ -45,6 +47,11 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 //        서버에서 토론 주제에 대한 상세 진행 상황 가져오기
         getTopicDetailFromServer()
+
+//        어댑터 초기화 => 리스트뷰와 연결
+        mReplyAdapter = ReplyAdapter(mContext,R.layout.reply_list_item,mReplyList)
+        replyListView.adapter = mReplyAdapter
+
     }
 
     fun getTopicDetailFromServer(){
@@ -74,6 +81,10 @@ class ViewTopicDetailActivity : BaseActivity() {
                 runOnUiThread{
 
                    setTopicDataToUI()
+
+//                    댓글 목록을 불러왔다고 리스트뷰 어댑터에게 알림
+                    mReplyAdapter.notifyDataSetChanged()
+
                 }
             }
         })
