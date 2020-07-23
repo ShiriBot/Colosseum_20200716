@@ -15,7 +15,7 @@ class TimeUtil {
 //        12시간 이내 : ?시간 전
 //        그 이상 : ?년 ?월 ? 오전/오후 ?시 ?분
 
-        private val dateformat = SimpleDateFormat("yyyy년  M월 d일 a 'h시 m분")
+        private val dateformat = SimpleDateFormat("yyyy년  M월 d일 a h시 m분")
 
         fun getTimeAgoFromCalendar(datetime:Calendar) : String {
 
