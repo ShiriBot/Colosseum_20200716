@@ -36,6 +36,16 @@ class ViewTopicDetailActivity : BaseActivity() {
         SetupEvents()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+//        서버에서 다시 토론 상황을 불러오자.
+
+        getTopicDetailFromServer()
+
+    }
+
+
 
     override fun SetValues() {
 
@@ -47,8 +57,10 @@ class ViewTopicDetailActivity : BaseActivity() {
             Toast.makeText(mContext,"주제 상세 id에 문제가 있습니다.",Toast.LENGTH_SHORT).show()
         }
 
-//        서버에서 토론 주제에 대한 상세 진행 상황 가져오기
-        getTopicDetailFromServer()
+////        서버에서 토론 주제에 대한 상세 진행 상황 가져오기
+//        getTopicDetailFromServer()
+//        => onResume에서 토론 진행 현황을 서버에서 받아온다.
+//        기존 서버 호출 코드 삭제
 
 //        어댑터 초기화 => 리스트뷰와 연결
         mReplyAdapter = ReplyAdapter(mContext,R.layout.reply_list_item,mReplyList)
@@ -59,6 +71,9 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         ServerUtil.getRequestTopicDetail(mContext,mTopicId,object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {
+
+//                의견 목록을 한번 비웠다가 다시 파싱
+                mReplyList.clear()
 
                 val data = json.getJSONObject("data")
 
