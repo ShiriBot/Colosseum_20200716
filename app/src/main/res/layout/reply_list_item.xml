@@ -65,6 +65,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/rereplyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="답글 ~"
@@ -77,12 +78,14 @@
                 android:layout_weight="1"/>
 
             <Button
+                android:id="@+id/likeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="좋아요 ~"
                 android:focusable="false"/>
 
             <Button
+                android:id="@+id/dislikeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="싫어요 ~"
