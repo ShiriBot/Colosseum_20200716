@@ -32,6 +32,10 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
         val replyWriteTimeTxt = row.findViewById<TextView>(R.id.replyWriteTimeTxt)
         val replyTxt = row.findViewById<TextView>(R.id.replyTxt)
 
+        val rereplyBtn = row.findViewById<Button>(R.id.rereplyBtn)
+        val likeBtn = row.findViewById<Button>(R.id.likeBtn)
+        val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
+
         val data = mList[position]
 
         replyNickname.text = data.writer.nickName
@@ -41,6 +45,10 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
 //        시간정보 텍스트뷰 내용 설정 => 방금 전, ?분전, ?시간 전 등등등
 
         replyWriteTimeTxt.text = TimeUtil.getTimeAgoFromCalendar(data.writtenDateTime)
+
+        likeBtn.text = "좋아요 ${data.likeCount}"
+        dislikeBtn.text = "싫어요 ${data.dislikeCount}"
+        rereplyBtn.text = "답글 ${data.replyCount}"
 
 
         return row
