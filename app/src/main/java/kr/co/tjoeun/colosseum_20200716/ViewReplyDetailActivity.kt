@@ -25,6 +25,7 @@ class ViewReplyDetailActivity : BaseActivity() {
 //    의견에 달린 답글들을 저장할 목록
 
     val mReReplyList = ArrayList<Reply>()
+
     lateinit var mReReplyAdapter : ReReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 //        해당 id 값에 맞는 의견 정보를 (서버에서) 다시 불러오자
 
         getReplyFromServer()
+
+        mReReplyAdapter =ReReplyAdapter(mContext,R.layout.re_reply_list_item,mReReplyList)
+        reReplyListView.adapter=mReReplyAdapter
 
 
     }
@@ -76,8 +80,6 @@ class ViewReplyDetailActivity : BaseActivity() {
 
                 }
 
-                mReReplyList
-
 
 //                mReply 내부의 변수(정보)들을 => 화면에 반영
 
@@ -94,6 +96,10 @@ class ViewReplyDetailActivity : BaseActivity() {
                     writtenDateTimeTxt.text = TimeUtil.getTimeAgoFromCalendar(mReply.writtenDateTime)
 
                     replyContentTxt.text=mReply.content
+                    
+//                    답글 목록이 모두 불러지면 새로 반영
+
+                    mReReplyAdapter.notifyDataSetChanged()
 
                 }
 
