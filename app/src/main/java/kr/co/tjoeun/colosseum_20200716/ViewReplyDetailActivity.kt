@@ -21,8 +21,11 @@ class ViewReplyDetailActivity : BaseActivity() {
 //    이 화면에서 보여줘야할 의견의 정보를 가진 변수 => 멤버변수
 
     lateinit var mReply : Reply
-    val mReplyList = ArrayList<Reply>()
-    lateinit var mReplyAdapter : ReplyAdapter
+
+//    의견에 달린 답글들을 저장할 목록
+
+    val mReReplyList = ArrayList<Reply>()
+    lateinit var mReReplyAdapter : ReReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,11 +59,31 @@ class ViewReplyDetailActivity : BaseActivity() {
                 val data =json.getJSONObject("data")
                 val replyObj = data.getJSONObject("reply")
 
+
 //                replyObj를 => Reply클래스로 변환
 
                 mReply = Reply.getReplyFromJson(replyObj)
 
+//                replies JSONArray를 돌면서 => Reply로 변환해서 => mReReply
+
+                val replies = replyObj.getJSONArray("replies")
+
+                for (i in 0 until replies.length()){
+
+                     val reply = Reply.getReplyFromJson(replies.getJSONObject(i))
+
+                    mReReplyList.add(reply)
+
+                }
+
+                mReReplyList
+
+
 //                mReply 내부의 변수(정보)들을 => 화면에 반영
+
+
+
+
 
                 runOnUiThread {
 
