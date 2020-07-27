@@ -3,6 +3,9 @@ package kr.co.tjoeun.colosseum_20200716
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
+import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.co.tjoeun.colosseum_20200716.adapters.ReReplyAdapter
+import kr.co.tjoeun.colosseum_20200716.adapters.ReplyAdapter
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
 import kr.co.tjoeun.colosseum_20200716.datas.User
 import kr.co.tjoeun.colosseum_20200716.utils.ServerUtil
@@ -18,6 +21,8 @@ class ViewReplyDetailActivity : BaseActivity() {
 //    이 화면에서 보여줘야할 의견의 정보를 가진 변수 => 멤버변수
 
     lateinit var mReply : Reply
+    val mReplyList = ArrayList<Reply>()
+    lateinit var mReplyAdapter : ReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,7 @@ class ViewReplyDetailActivity : BaseActivity() {
 //        해당 id 값에 맞는 의견 정보를 (서버에서) 다시 불러오자
 
         getReplyFromServer()
+
 
     }
 
