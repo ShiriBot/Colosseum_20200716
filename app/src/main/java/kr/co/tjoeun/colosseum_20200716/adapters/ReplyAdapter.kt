@@ -68,20 +68,23 @@ class ReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply>)
         if (data.myLike){
 //            좋아요 버튼의 배경을 => red_border_box로 변경
             likeBtn.setBackgroundResource(R.drawable.red_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.naverRed))
         }
         else{
 //          좋아요 버튼의 배경을 => grey_border_box로 변경
             likeBtn.setBackgroundResource(R.drawable.grey_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.textGray))
         }
 
         if (data.myDislike){
 //            좋아요 버튼의 배경을 => red_border_box로 변경
             dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
-
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.naverBlue))
         }
         else{
 //          좋아요 버튼의 배경을 => grey_border_box로 변경
             dislikeBtn.setBackgroundResource(R.drawable.grey_border_box)
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.textGray))
         }
 
 //        답글 버튼이 눌리면 => 의견 상세 화면으로 진입
