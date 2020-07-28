@@ -20,6 +20,10 @@ class Reply {
     var dislikeCount = 0
     var replyCount = 0
 
+//    내가 좋아요를 눌렀는지 / 싫어요를 눌렀는지 저장한 변수들
+    var myLike = false
+    var myDislike = false
+
     companion object {
 
         //        JSONObject 하나를 넣으면-> 의견 내용을 파싱해서 Reply로 리턴하는 기능
@@ -63,6 +67,9 @@ class Reply {
             r.likeCount = json.getInt("like_count")
             r.dislikeCount = json.getInt("dislike_count")
             r.replyCount = json.getInt("reply_count")
+
+            r.myLike = json.getBoolean("my_like")
+            r.myDislike = json.getBoolean("my_dislike")
 
             return r
         }
