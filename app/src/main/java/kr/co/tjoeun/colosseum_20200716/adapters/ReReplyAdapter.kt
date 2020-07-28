@@ -2,6 +2,8 @@ package kr.co.tjoeun.colosseum_20200716.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +13,9 @@ import android.widget.TextView
 import kr.co.tjoeun.colosseum_20200716.R
 import kr.co.tjoeun.colosseum_20200716.ViewReplyDetailActivity
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
+import kr.co.tjoeun.colosseum_20200716.utils.ServerUtil
 import kr.co.tjoeun.colosseum_20200716.utils.TimeUtil
+import org.json.JSONObject
 
 class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply>): ArrayAdapter<Reply> (mContext, resId, mList) {
 
@@ -48,10 +52,49 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
         likeBtn.text = "좋아요 ${data.likeCount}"
         dislikeBtn.text = "싫어요 ${data.dislikeCount}"
 
+        likeBtn.setOnClickListener {
+
+            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,true, object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val dataobj = json.getJSONObject("data")
+                    val replyobj = dataobj.getJSONObject("reply")
+
+                    val reply = Reply.getReplyFromJson(replyobj)
+
+                    data.likeCount = reply.likeCount
+                    data.dislikeCount = reply.dislikeCount
+                    val uiHandler = Handler(Looper.getMainLooper())
+                    uiHandler.post {
+                    notifyDataSetChanged()}
+                }
+            })
+        }
+
+        dislikeBtn.setOnClickListener {
+
+            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,false, object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val dataobj = json.getJSONObject("data")
+                    val replyobj = dataobj.getJSONObject("reply")
+
+                    val reply = Reply.getReplyFromJson(replyobj)
+
+                    data.likeCount = reply.likeCount
+                    data.dislikeCount = reply.dislikeCount
+                    val uiHandler = Handler(Looper.getMainLooper())
+                    uiHandler.post {
+                        notifyDataSetChanged()}
+                }
+            })
+        }
+
 
 
         return row
 
     }
+
 
 }
