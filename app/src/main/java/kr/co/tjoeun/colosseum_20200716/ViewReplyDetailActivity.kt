@@ -1,13 +1,10 @@
 package kr.co.tjoeun.colosseum_20200716
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
-import kotlinx.android.synthetic.main.activity_view_topic_detail.*
 import kr.co.tjoeun.colosseum_20200716.adapters.ReReplyAdapter
-import kr.co.tjoeun.colosseum_20200716.adapters.ReplyAdapter
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
-import kr.co.tjoeun.colosseum_20200716.datas.User
 import kr.co.tjoeun.colosseum_20200716.utils.ServerUtil
 import kr.co.tjoeun.colosseum_20200716.utils.TimeUtil
 import org.json.JSONObject
@@ -70,6 +67,8 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //                replies JSONArray를 돌면서 => Reply로 변환해서 => mReReply
 
+                mReReplyList.clear()
+
                 val replies = replyObj.getJSONArray("replies")
 
                 for (i in 0 until replies.length()){
@@ -115,6 +114,32 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 
     override fun SetupEvents() {
+
+        reReplyPostBtn.setOnClickListener {
+
+            val content = reReplyEdt.text.toString()
+
+            if (content.length < 5){
+                Toast.makeText(mContext,"내용은 최소 다섯글자 이상 입력해주세요.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            ServerUtil.postRequestReReply(mContext,mReplyId,content,object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+                    runOnUiThread {
+                        val message = json.getString("message")
+                        Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
+                    }
+
+//                    의견 상세를 다시 불러내서 => 답글목록도 다시 받아내가
+                    getReplyFromServer()
+
+                }
+
+            })
+
+
+        }
 
     }
 

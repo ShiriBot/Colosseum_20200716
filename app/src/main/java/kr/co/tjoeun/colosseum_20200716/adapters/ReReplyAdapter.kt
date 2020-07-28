@@ -32,7 +32,6 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
         val replyWriteTimeTxt = row.findViewById<TextView>(R.id.replyWriteTimeTxt)
         val replyTxt = row.findViewById<TextView>(R.id.replyTxt)
 
-        val rereplyBtn = row.findViewById<Button>(R.id.rereplyBtn)
         val likeBtn = row.findViewById<Button>(R.id.likeBtn)
         val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
 
@@ -48,7 +47,7 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
 
         likeBtn.text = "좋아요 ${data.likeCount}"
         dislikeBtn.text = "싫어요 ${data.dislikeCount}"
-        rereplyBtn.text = "답글 ${data.replyCount}"
+
 
 
         return row
