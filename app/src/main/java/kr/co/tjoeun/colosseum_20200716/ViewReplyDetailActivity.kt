@@ -81,11 +81,6 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 
 //                mReply 내부의 변수(정보)들을 => 화면에 반영
-
-
-
-
-
                 runOnUiThread {
 
                     nickNameTxt.text = mReply.writer.nickName
@@ -99,6 +94,15 @@ class ViewReplyDetailActivity : BaseActivity() {
 //                    답글 목록이 모두 불러지면 새로 반영
 
                     mReReplyAdapter.notifyDataSetChanged()
+
+//                    리스트뷰의 맨 밑(마지막 답글)으로 끌어내이기
+//                    마지막 답글 : 목록의 맨 끝 => 목록의 길이 -1번째
+//                    답글 10개 : 9번 마지막
+
+                    reReplyListView.smoothScrollToPosition(mReReplyList.size -1)
+
+
+
 
                 }
 
@@ -129,6 +133,9 @@ class ViewReplyDetailActivity : BaseActivity() {
                     runOnUiThread {
                         val message = json.getString("message")
                         Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
+//                        입력한 내용을 다시 빈칸으로 돌려주자.
+//                        EditText의 text를 ""으로 설정하자. => setText 이용해야함.
+                        reReplyEdt.setText("")
                     }
 
 //                    의견 상세를 다시 불러내서 => 답글목록도 다시 받아내가
