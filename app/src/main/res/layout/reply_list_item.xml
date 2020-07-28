@@ -68,8 +68,10 @@
                 android:id="@+id/rereplyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="답글 ~"
                 android:focusable="false"
+                android:background="@drawable/grey_border_box"
                 />
 
             <TextView
@@ -81,15 +83,22 @@
                 android:id="@+id/likeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/textGray"
                 android:text="좋아요 ~"
-                android:focusable="false"/>
+                android:focusable="false"
+                android:background="@drawable/grey_border_box"
+                android:layout_marginRight="5dp"
+                />
 
             <Button
                 android:id="@+id/dislikeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/textGray"
                 android:text="싫어요 ~"
-                android:focusable="false"/>
+                android:focusable="false"
+                android:background="@drawable/grey_border_box"
+                />
 
 
         </LinearLayout>
