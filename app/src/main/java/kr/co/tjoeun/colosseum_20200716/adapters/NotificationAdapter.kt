@@ -9,6 +9,7 @@ import android.widget.TextView
 import kr.co.tjoeun.colosseum_20200716.R
 import kr.co.tjoeun.colosseum_20200716.datas.Notification
 import kr.co.tjoeun.colosseum_20200716.datas.Reply
+import kr.co.tjoeun.colosseum_20200716.utils.TimeUtil
 import java.util.zip.Inflater
 
 class NotificationAdapter (val mContext: Context, resId : Int, val mList : List<Notification>) : ArrayAdapter<Notification>(mContext, resId, mList) {
@@ -31,6 +32,7 @@ class NotificationAdapter (val mContext: Context, resId : Int, val mList : List<
         val data = mList[position]
 
         notificationTxt.text = data.title
+        notificationTimeTxt.text=TimeUtil.getTimeAgoFromCalendar(data.createAtCal)
 
         return row
     }
