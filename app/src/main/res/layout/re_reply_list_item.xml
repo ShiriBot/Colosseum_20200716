@@ -78,12 +78,14 @@
 
             <Button
                 android:id="@+id/likeBtn"
+                android:tag="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="좋아요 ~"
                 android:focusable="false"/>
 
             <Button
+                android:tag="false"
                 android:id="@+id/dislikeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

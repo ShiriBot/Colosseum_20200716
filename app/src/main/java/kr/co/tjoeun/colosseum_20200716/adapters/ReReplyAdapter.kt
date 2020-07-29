@@ -52,6 +52,8 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
         likeBtn.text = "좋아요 ${data.likeCount}"
         dislikeBtn.text = "싫어요 ${data.dislikeCount}"
 
+
+
         likeBtn.setOnClickListener {
 
             ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,true, object :ServerUtil.JsonResponseHandler{
@@ -89,6 +91,39 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
                 }
             })
         }
+
+        val sendLikeOrDislikeCode = View.OnClickListener {
+
+            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id, it.tag.toString().toBoolean(),object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val dataobj = json.getJSONObject("data")
+
+                    val reply = Reply.getReplyFromJson(dataobj.getJSONObject("reply"))
+
+                    data.likeCount = reply.likeCount
+                    data.dislikeCount=reply.dislikeCount
+                    data.myLike=reply.myLike
+                    data.myDislike=reply.myDislike
+
+                    val uiHandler = Handler(Looper.getMainLooper())
+
+                    uiHandler.post{
+                        notifyDataSetInvalidated()
+                    }
+
+
+                }
+
+
+            })
+
+        }
+
+//        좋아요 버튼/ 싫어요 버튼이 클릭되면 => sendLikeOrDislikeCode 내부의 내용을 실행하게 하자.
+
+        likeBtn.setOnClickListener(sendLikeOrDislikeCode)
+        dislikeBtn.setOnClickListener(sendLikeOrDislikeCode)
 
 
 
