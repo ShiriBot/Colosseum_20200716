@@ -21,6 +21,7 @@ class MainActivity : BaseActivity() {
 
         SetupEvents()
         SetValues()
+        setCustomActionBar()
 
     }
 
