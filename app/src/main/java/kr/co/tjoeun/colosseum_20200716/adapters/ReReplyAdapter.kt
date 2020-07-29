@@ -52,45 +52,65 @@ class ReReplyAdapter (val mContext: Context, resId : Int, val mList : List<Reply
         likeBtn.text = "좋아요 ${data.likeCount}"
         dislikeBtn.text = "싫어요 ${data.dislikeCount}"
 
-
-
-        likeBtn.setOnClickListener {
-
-            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,true, object :ServerUtil.JsonResponseHandler{
-                override fun onResponse(json: JSONObject) {
-
-                    val dataobj = json.getJSONObject("data")
-                    val replyobj = dataobj.getJSONObject("reply")
-
-                    val reply = Reply.getReplyFromJson(replyobj)
-
-                    data.likeCount = reply.likeCount
-                    data.dislikeCount = reply.dislikeCount
-                    val uiHandler = Handler(Looper.getMainLooper())
-                    uiHandler.post {
-                    notifyDataSetChanged()}
-                }
-            })
+        if(data.myLike){
+            likeBtn.setBackgroundResource(R.drawable.red_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.naverRed))
         }
 
-        dislikeBtn.setOnClickListener {
-
-            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,false, object :ServerUtil.JsonResponseHandler{
-                override fun onResponse(json: JSONObject) {
-
-                    val dataobj = json.getJSONObject("data")
-                    val replyobj = dataobj.getJSONObject("reply")
-
-                    val reply = Reply.getReplyFromJson(replyobj)
-
-                    data.likeCount = reply.likeCount
-                    data.dislikeCount = reply.dislikeCount
-                    val uiHandler = Handler(Looper.getMainLooper())
-                    uiHandler.post {
-                        notifyDataSetChanged()}
-                }
-            })
+        else {
+            likeBtn.setBackgroundResource(R.drawable.grey_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.textGray))
         }
+
+        if(data.myDislike){
+            dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.naverBlue))
+        }
+
+        else {
+            dislikeBtn.setBackgroundResource(R.drawable.grey_border_box)
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.textGray))
+        }
+
+
+
+//        likeBtn.setOnClickListener {
+//
+//            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,true, object :ServerUtil.JsonResponseHandler{
+//                override fun onResponse(json: JSONObject) {
+//
+//                    val dataobj = json.getJSONObject("data")
+//                    val replyobj = dataobj.getJSONObject("reply")
+//
+//                    val reply = Reply.getReplyFromJson(replyobj)
+//
+//                    data.likeCount = reply.likeCount
+//                    data.dislikeCount = reply.dislikeCount
+//                    val uiHandler = Handler(Looper.getMainLooper())
+//                    uiHandler.post {
+//                    notifyDataSetChanged()}
+//                }
+//            })
+//        }
+//
+//        dislikeBtn.setOnClickListener {
+//
+//            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id,false, object :ServerUtil.JsonResponseHandler{
+//                override fun onResponse(json: JSONObject) {
+//
+//                    val dataobj = json.getJSONObject("data")
+//                    val replyobj = dataobj.getJSONObject("reply")
+//
+//                    val reply = Reply.getReplyFromJson(replyobj)
+//
+//                    data.likeCount = reply.likeCount
+//                    data.dislikeCount = reply.dislikeCount
+//                    val uiHandler = Handler(Looper.getMainLooper())
+//                    uiHandler.post {
+//                        notifyDataSetChanged()}
+//                }
+//            })
+//        }
 
         val sendLikeOrDislikeCode = View.OnClickListener {
 

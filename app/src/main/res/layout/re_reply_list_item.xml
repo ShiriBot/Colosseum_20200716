@@ -81,6 +81,7 @@
                 android:tag="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/grey_border_box"
                 android:text="좋아요 ~"
                 android:focusable="false"/>
 
@@ -89,6 +90,7 @@
                 android:id="@+id/dislikeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/grey_border_box"
                 android:text="싫어요 ~"
                 android:focusable="false"/>
 
