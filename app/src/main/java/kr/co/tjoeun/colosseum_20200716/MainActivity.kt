@@ -81,6 +81,12 @@ class MainActivity : BaseActivity() {
 
    override fun SetupEvents() {
 
+//       알림버튼을 누르면 => 알림 목록 화면으로 이동
+       notificationBtn.setOnClickListener {
+           val myIntent = Intent(mContext,NotificationListActivity::class.java)
+           startActivity(myIntent)
+       }
+
 //       토론주제를 누르면 => 상세화면으로 이동
        topicListView.setOnItemClickListener { parent, view, position, id ->
 
