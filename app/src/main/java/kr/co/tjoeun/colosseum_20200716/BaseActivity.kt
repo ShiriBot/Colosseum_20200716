@@ -1,6 +1,7 @@
 package kr.co.tjoeun.colosseum_20200716
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -11,6 +12,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun SetValues()
     abstract fun SetupEvents()
+
+//    액션바xml에서 만들어준 뷰들을 멤버변수로 만들어주자.
+//    BaseActivity를 상속받는 모든 액티비티들이 => 이 변수들을 상속받게 된다.
+
+    lateinit var notificationBtn : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +51,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
         val parentToolbar = myActionBar.customView.parent as Toolbar
         parentToolbar.setContentInsetsAbsolute(0,0)
+
+//        액션바XML에 있는 뷰들을 => 코틀린에서 사용할 수 있도록 연결
+        notificationBtn = myActionBar.customView.findViewById(R.id.notificationBtn)
 
     }
 
