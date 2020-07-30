@@ -35,6 +35,8 @@
             android:layout_height="16dp"
             android:gravity="center"
             android:text="23"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:background="@drawable/red_circle"
             android:layout_gravity="right"
             android:textColor="@color/white"
